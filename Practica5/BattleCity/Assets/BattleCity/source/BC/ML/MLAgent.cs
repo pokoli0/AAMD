@@ -147,9 +147,18 @@ public class MLAgent : MonoBehaviour
         switch (model)
         {
             case ModelType.MLP:
-                float[] rawPerceptions = perception.Parameters.ConvertToFloatArray();
+                int nParams = Enum.GetNames(typeof(PlayerPerception.Player_PARAMETER_ID)).Length;
+
+                MLGym.Parameters parameters = PlayerPerception.ReadParameters(
+                    nParams,
+                    Time.timeSinceLevelLoad,
+                    perception,
+                    perception.health.health
+                );
                 
-                float[] outputs = RunFeedForward(rawPerceptions);
+                float[] parametersArray = parameters.ConvertToFloatArray();
+                
+                float[] outputs = RunFeedForward(parametersArray);
 
                 action = mlpModel.Predict(outputs);
                 
