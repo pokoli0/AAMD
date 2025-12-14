@@ -70,6 +70,6 @@ final_data[labeled_columns] = labeled_final
 # las guarda en un csv con lo
 final_data.to_csv("preprocessedData.csv", index=False)
 
-utl.WriteStandardScaler("standard_scaler", scaler.mean_, scaler.var_)
+utl.WriteStandardScaler("standard_scaler.txt", scaler.mean_, scaler.var_)
 
 
