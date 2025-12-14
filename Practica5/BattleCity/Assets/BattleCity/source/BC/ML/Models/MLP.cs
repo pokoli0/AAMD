@@ -65,10 +65,48 @@ public class MLPModel
     /// <returns>The action label</returns>
     public float[] FeedForward(float[] input)
     {
-        //TODO: implement feedworward.
-        //the size of the output layer depends on what actions you have performed in the game.
-        //By default it is 7 (number of possible actions) but some actions may not have been performed and therefore the model has assumed that they do not exist.
-        return new float[5];
+        List<float[,]> weights = mlpParameters.GetCoeff();
+        List<float[]> intercepts = mlpParameters.GetInter();
+
+        float[] currentLayerInput = input;
+
+        // Iteramos por cada capa de la red
+        for (int i = 0; i < weights.Count; i++)
+        {
+            // Matriz de pesos
+            float[,] w = weights[i];  
+            // Vector de bias
+            float[] b = intercepts[i];  
+            
+            int nInputs = w.GetLength(0);
+            int nOutputs = w.GetLength(1);
+
+            float[] layerOutput = new float[nOutputs];
+
+            // Input * Pesos + Bias
+            for (int j = 0; j < nOutputs; j++)
+            {
+                // Inicializamos con el bias
+                float sum = b[j]; 
+
+                for (int k = 0; k < nInputs; k++)
+                {
+                    if (k < currentLayerInput.Length) 
+                    {
+                        sum += currentLayerInput[i] * w[k, j];
+                    }
+                }
+
+                // Aplicamos función de activación
+                layerOutput[j] = sigmoid(sum);
+            }
+
+            // La salida de esta capa es la entrada de la siguiente
+            currentLayerInput = layerOutput;
+        }
+
+        // Al final aplicamos Softmax
+        return SoftMax(currentLayerInput);
     }
 
     /// <summary>
@@ -78,8 +116,7 @@ public class MLPModel
     /// <returns></returns>
     private float sigmoid(float z)
     {
-        //TODO implementar
-        return 0f;
+        return 1.0f / (1.0f + Mathf.Exp(-z));
     }
 
 
@@ -91,8 +128,24 @@ public class MLPModel
     /// <returns></returns>
     public float[] SoftMax(float[] zArr)
     {
-        //TODO implementar
-        return zArr;
+        float[] result = new float[zArr.Length];
+        float sum = 0f;
+
+        // Calculamos exponenciales y suma total
+        for (int i = 0; i < zArr.Length; i++)
+        {
+            result[i] = Mathf.Exp(zArr[i]);
+            sum += result[i];
+        }
+
+        // Dividimos cada elemento por la suma
+        for (int i = 0; i < zArr.Length; i++)
+        {
+            if (sum != 0)
+                result[i] /= sum;
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -108,16 +161,23 @@ public class MLPModel
     }
 
     /// <summary>
-    /// Obtiene el �ndice de mayor valor.
+    /// Obtiene el �ndice de mayor valor.
     /// </summary>
     /// <param name="output"></param>
     /// <param name="max"></param>
     /// <returns></returns>
     public int GetIndexMaxValue(float[] output, out float max)
     {
-        max = output[0];
+        max = -float.MaxValue;
         int index = 0;
-        //TODO impleemntar.
+
+        for (int i = 0; i < output.Length; i++)
+        {
+            if (!(output[i] > max)) continue;
+            
+            max = output[i];
+            index = i;
+        }
         return index;
     }
 }
