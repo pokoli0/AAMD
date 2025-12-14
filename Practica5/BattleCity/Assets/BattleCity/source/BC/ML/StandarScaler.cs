@@ -24,15 +24,34 @@ public class StandarScaler
     }
 
     /// <summary>
-    /// Aplica una normalización - media entre desviación tipica.
+    /// Aplica una normalizaciï¿½n - media entre desviaciï¿½n tipica.
     /// </summary>
     /// <param name="a_input"></param>
     /// <returns></returns>
     public float[] Transform(float[] a_input)
     {
         float[] scaled = new float[a_input.Length];
-        //TODO implementar
 
-        return a_input;
+        int limit = Mathf.Min(a_input.Length, mean.Length);
+
+        for (int i = 0; i < limit; i++)
+        {
+            // Evitar divisiÃ³n por cero
+            if (std[i] != 0)
+            {
+                scaled[i] = (a_input[i] - mean[i]) / std[i];
+            }
+            else
+            {
+                scaled[i] = a_input[i] - mean[i];
+            }
+        }
+
+        for (int i = limit; i < a_input.Length; i++)
+        {
+            scaled[i] = a_input[i];
+        }
+
+        return scaled;
     }
 }

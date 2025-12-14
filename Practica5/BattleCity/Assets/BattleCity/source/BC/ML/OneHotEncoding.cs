@@ -33,16 +33,32 @@ public class OneHotEncoding
     }
 
     /// <summary>
-    /// Realiza la trasformación del OHE a los elementos seleccionados.
+    /// Realiza la trasformaciï¿½n del OHE a los elementos seleccionados.
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     public float[] Transform(float[] input)
     {
         List<float> output = new List<float>();
+
         for (int i = 0; i < input.Length; i++)
         {
-            //TODO implementar el OHE.
+            // Verificamos si requiere OHE
+            if (extraElements.ContainsKey(i))
+            {
+                int categoryCount = extraElements[i];
+                int value = (int)input[i]; // Indice actual
+
+                // Vector one-hot
+                for (int j = 0; j < categoryCount; j++)
+                {
+                    output.Add(j == value ? 1.0f : 0.0f);
+                }
+            }
+            else
+            {
+                output.Add(input[i]);
+            }
         }
         return output.ToArray();
     }

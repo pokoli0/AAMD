@@ -97,10 +97,26 @@ public class PlayerPerception : PerceptionBase
 
     public enum Player_PARAMETER_ID
     {
-        NEIGHBORHOOD_UP = 0, NEIGHBORHOOD_DOWN = 1, NEIGHBORHOOD_RIGHT = 2, NEIGHBORHOOD_LEFT = 3,
-        NEIGHBORHOOD_DIST_UP = 4, NEIGHBORHOOD_DIST_DOWN = 5, NEIGHBORHOOD_DIST_RIGHT = 6, NEIGHBORHOOD_DIST_LEFT = 7,
-        COMMAND_CENTER_X = 8, COMMAND_CENTER_Y = 9, AGENT_1_X = 10, AGENT_1_Y = 11, AGENT_2_X = 12, AGENT_2_Y = 13, CAN_FIRE = 14, HEALTH = 15, LIFE_X = 16, 
-        LIFE_Y = 17, EXIT_X = 18, EXIT_Y = 19//, ACT_1 = 20, ACT_2 = 21, ACT_3 = 22, ACT_4 = 23, ACT_5 = 24
+        NEIGHBORHOOD_UP = 0, 
+        NEIGHBORHOOD_DOWN = 1, 
+        NEIGHBORHOOD_RIGHT = 2, 
+        NEIGHBORHOOD_LEFT = 3,
+        NEIGHBORHOOD_DIST_UP = 4, 
+        NEIGHBORHOOD_DIST_DOWN = 5, 
+        NEIGHBORHOOD_DIST_RIGHT = 6, 
+        NEIGHBORHOOD_DIST_LEFT = 7,
+        COMMAND_CENTER_X = 8, 
+        COMMAND_CENTER_Y = 9, 
+        AGENT_1_X = 10, 
+        AGENT_1_Y = 11, 
+        AGENT_2_X = 12, 
+        AGENT_2_Y = 13, 
+        CAN_FIRE = 14, 
+        HEALTH = 15, 
+        LIFE_X = 16, 
+        LIFE_Y = 17, 
+        EXIT_X = 18, 
+        EXIT_Y = 19//, ACT_1 = 20, ACT_2 = 21, ACT_3 = 22, ACT_4 = 23, ACT_5 = 24
 
     }
 
