@@ -6,16 +6,13 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 data = pd.read_csv("cleanData.csv")  # abre el archivo de los datos limpios
 
-action_cols = [col for col in data.columns if col.startswith('action')]
-
-atributes = data.drop(columns=action_cols)
-
-color = np.argmax(data[action_cols].values, axis=1)
+unnecessary_columns = ["action"]
+atributes = data.drop(columns=unnecessary_columns)   # coge la primera columna MENOS la de action lmao
+color = data["action"]  #codificando cada action como un color
 
 # MOMENTO PCA: 
 # [explicacion guapa]

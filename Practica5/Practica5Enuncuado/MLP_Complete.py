@@ -7,8 +7,7 @@ class MLP_Complete:
     Constructor: Computes MLP_Complete.
     Args:
         inputLayer (int): size of input
-        hiddenLayers (array-like): number
-        of layers and size of each layers.
+        hiddenLayers (array-like): number of layers and size of each layers.
         outputLayer (int): size of output layer
         seed (scalar): seed of the random numeric.
         epislom (scalar) : random initialization range.
@@ -64,8 +63,8 @@ class MLP_Complete:
 
         # Capa de entrada
         s = self._size(x)
-        a1 = np.hstack([np.ones((s, 1)), x])
-        a.append(a1) # a[0]
+        a0 = np.hstack([np.ones((s, 1)), x])
+        a.append(a0) # a[0]
 
         # Capas ocultas y salida
         for i, theta in enumerate(self.thetas):
