@@ -1,5 +1,5 @@
-from skl2onnx import to_onnx
-from onnx2json import convert
+#from skl2onnx import to_onnx
+#from onnx2json import convert
 import pickle
 import json
 
